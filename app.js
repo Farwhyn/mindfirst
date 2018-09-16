@@ -173,6 +173,34 @@ app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAutho
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/google-maps', apiController.getGoogleMaps);
 
+//app.use(express.static(path.resolve(__dirname, 'client')));
+var FitbitApiClient = require("fitbit-node");
+var client = new FitbitApiClient({clientId: process.env.FITBIT_ID, clientSecret: process.env.FITBIT_SECRET, apiVersion: "1.2"})
+app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 60000 }}));
+app.get("/api/fitbit", function (req, res) {
+  res.redirect(client.getAuthorizeUrl('sleep heartrate profile',process.env.FITBIT_REDIRECT_URL));
+});
+app.get("/auth/fitbit/callback", function (req, res) {
+  // exchange the authorization code we just received for an access token
+  client.getAccessToken(req.query.code, process.env.FITBIT_REDIRECT_URL).then(function (result) {
+      // use the access token to fetch the user's profile information
+      req.session.access_token = result.access_token;
+      res.redirect("/api/fitbit/sleep.json");
+  }).catch(function (error) {
+      res.send(error);
+  });
+});
+app.get("/api/fitbit/sleep.json", function(req, res){
+  //if (req.session.authorized) {
+    client.get("/sleep/date/2018-09-01/2018-09-14.json", req.session.access_token).then(function (results) {
+        res.json(results[0]);
+    });
+/* } else {
+    res.status(403);
+    res.json({ errors: [{ message: 'not authorized' }]});
+} */
+});
+
 /**
  * OAuth authentication routes. (Sign in)
  */
