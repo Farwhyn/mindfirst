@@ -3,7 +3,7 @@ extends layout
 block content
   .row
     .col-sm
-      img.container-sm(src="/img/Plus.svg")
+      img#frontimg(src="/img/Plus.svg")
       br/
       br/
       br/
@@ -12,7 +12,7 @@ block content
       ul.nav.navbar-nav.row.text-center
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
-            a.nav-link(href='/login') Login
+            a.btn.btn-info(href='/login') Login
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
             a.nav-link(href='/signup') Create Account
         else
@@ -25,9 +25,9 @@ block content
               span= user.profile.name || user.email || user.id
                 .row.text-center
                   li.nav-item
-                    a.col-sm.nav-item(href='/account') My Account
+                    a.btn.btn-warning(href='/account') My Account
                   li.nav-item
-                    a.col-sm.nav-item(href='/dashboard') Dashboard
+                    a.btn.btn-info(href='/dashboard') Dashboard
                   li.nav-item
-                    a.col-sm.nav-item(href='/logout') Logout
+                    a.btn.btn-danger(href='/logout') Logout
                   
