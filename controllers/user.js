@@ -126,6 +126,15 @@ exports.getAccount = (req, res) => {
 };
 
 /**
+ * GET /form
+ */
+exports.getForm = (req, res) => {
+  res.render('account/form', {
+    title: 'Questionaire'
+  });
+};
+
+/**
  * POST /account/profile
  * Update profile information.
  */

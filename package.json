@@ -12,7 +12,8 @@
     "postinstall": "npm rebuild node-sass",
     "start": "node app.js",
     "test": "nyc mocha --timeout=3000 --exit",
-    "lint": "eslint \"**/*.js\""
+    "lint": "eslint \"**/*.js\"",
+    "dev": "nodemon --watch app.js"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
@@ -74,6 +75,7 @@
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-import": "^2.14.0",
     "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
     "nyc": "^13.0.1",
     "sinon": "^6.1.5",
     "sinon-mongoose": "^2.2.1",
