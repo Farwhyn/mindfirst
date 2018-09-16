@@ -176,7 +176,7 @@ app.get('/api/google-maps', apiController.getGoogleMaps);
 //app.use(express.static(path.resolve(__dirname, 'client')));
 var FitbitApiClient = require("fitbit-node");
 var client = new FitbitApiClient({clientId: process.env.FITBIT_ID, clientSecret: process.env.FITBIT_SECRET, apiVersion: "1.2"})
-app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 60000 }}));
+//app.use(session({ secret: process.env.SESSION_SECRET, cookie: { maxAge: 60000 }}));
 app.get("/api/fitbit", function (req, res) {
   res.redirect(client.getAuthorizeUrl('sleep heartrate profile',process.env.FITBIT_REDIRECT_URL));
 });
