@@ -233,9 +233,10 @@ block content
         var datasetLineChart = [];
         for(var i = 0; i < newData.length; i++) {
             for(var j = 0; j < newData[i].length; j++) {
-                var setweek = "Week " + (i + 1)
+                var setweek = "Week " + (i + 1);
+                var sleepHours = Math.round(newData[i][j].sleepduration / 60);
                 datasetBarChart.push({ group: setweek, category: days[j], measure: newData[i][j].energy});
-                datasetLineChart.push({ group: setweek, category: days[j], measure: newData[i][j].sleepduration});
+                datasetLineChart.push({ group: setweek, category: days[j], measure: sleepHours});
             }
         }
         console.log(datasetLineChart);
@@ -429,7 +430,7 @@ block content
         .attr("y", 15)
         .attr("class","title")
         .attr("text-anchor", "middle")
-        .text(group + "'s Data Breakdown")
+        .text(group + "'s Energy Level Breakdown")
         ;
         }
         /*
@@ -579,7 +580,7 @@ block content
         .text(function(d) { return d.category + ": " + formatAsInteger(d.measure); })
         ;
         svg.append("text")
-        .text("Sleep per Week")
+        .text("Sleep duration per day (Hours)")
         .attr("id","lineChartTitle1")
         .attr("x",margin.left + ((width + margin.right)/2))
         .attr("y", 10)
