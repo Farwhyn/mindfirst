@@ -13,17 +13,6 @@ const clockwork = require('clockwork')({ key: process.env.CLOCKWORK_KEY });
 const paypal = require('paypal-rest-sdk');
 const lob = require('lob')(process.env.LOB_KEY);
 const ig = require('instagram-node').instagram();
-const { Venues, Users } = require('node-foursquare')({
-  secrets: {
-    clientId: process.env.FOURSQUARE_ID,
-    clientSecret: process.env.FOURSQUARE_SECRET,
-    redirectUrl: process.env.FOURSQUARE_REDIRECT_URL
-  },
-  foursquare: {
-    mode: 'foursquare',
-    version: 20140806,
-  }
-});
 
 /**
  * GET /api
@@ -659,3 +648,7 @@ exports.getGoogleMaps = (req, res) => {
     google_map_api_key: process.env.GOOGLE_MAP_API_KEY
   });
 };
+
+exports.getFitbit = (req,res) =>{
+  res.get("https://www.fitbit.com/oauth2/authorize?response_type=code&client_id=22D6QJ&redirect_uri=https%3A%2F%2Flocalhost%3A8080%2Ffitbitsuccess&scope=heartrate%20sleep")
+}
